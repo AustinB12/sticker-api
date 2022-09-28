@@ -14,4 +14,17 @@ router.get('/', async (req, res) => {
   })
 })
 
+router.post('/', async (req, res) => {
+  res.set({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  })
+
+  fs.writeFile('stickers.json', JSON.stringify({ data: req.body }), (err) => {
+    if (err) throw err
+    console.log('Data written to file')
+    res.json('Success')
+  })
+})
+
 module.exports = router
